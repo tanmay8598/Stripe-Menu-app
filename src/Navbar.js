@@ -4,7 +4,11 @@ import { FaBars } from 'react-icons/fa'
 const Navbar = () => {
   const { showToggle, setShowToggle } = useState(false)
   return (
-    <main>
+    <div
+      className={`${
+        showToggle ? 'show-submenu submenu-overlay' : 'submenu-overlay'
+      }`}
+    >
       <nav className='nav-container'>
         <nav className='nav-header'>
           <h1 className='nav-logo'>stripe</h1>
@@ -20,7 +24,7 @@ const Navbar = () => {
           </button>
         </nav>
       </nav>
-    </main>
+    </div>
   )
 }
 
