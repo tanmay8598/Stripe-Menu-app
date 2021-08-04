@@ -1,20 +1,30 @@
 import React, { useState } from 'react'
 import { FaBars } from 'react-icons/fa'
+import logo from './images/logo.svg'
 import { useGlobalContext } from './context.js'
-import sublinks from './data'
 
 const Navbar = () => {
   const { openSidebar, openSubmenu, closeSubmenu } = useGlobalContext()
 
-  const displaySubmenu = () => {
-    console.log('hover')
+  const displaySubmenu = (e) => {
+    const page = e.target.textContent
+    const tempBtn = e.target.getBoundingClientRect()
+    const center = (tempBtn.left + tempBtn.right) / 2
+    const bottom = tempBtn.bottom - 3
+    openSubmenu(page, { center, bottom })
+  }
+
+  const handleSubmenu = (e) => {
+    if (!e.target.classList.contains('link-btn')) {
+      closeSubmenu()
+    }
   }
 
   return (
-    <nav className='nav'>
+    <nav className='nav' onMouseOver={handleSubmenu}>
       <nav className='nav-container'>
         <nav className='nav-header'>
-          <h1 className='nav-logo'>stripe</h1>
+          <img src={logo} className='nav-logo' alt='' />
           <button className='btn toggle-btn' onClick={openSidebar}>
             <FaBars />
           </button>
